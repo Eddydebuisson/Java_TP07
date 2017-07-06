@@ -23,8 +23,10 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 
 		System.out.println("Tapez 99 pour annuler");
 		System.out.println("Veuillez saisir le code");
+
 		String code = Menu.sc.next();
 		if (!code.equals("99")) {
+
 			System.out.println("Veuillez saisir le nom (sans espace)");
 			String nom = Menu.sc.next();
 			System.out.println("Veuillez saisir le prix");
@@ -35,6 +37,9 @@ public class NouvellePizzaOptionMenu extends OptionMenu {
 			
 			// Sauvegarde pizza
 			dao.saveNewPizza(pizza);
+		
+
+		
 		}
 
 		return true;

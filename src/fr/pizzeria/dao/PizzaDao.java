@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDao implements IPizzaDao {
@@ -7,7 +10,7 @@ public class PizzaDao implements IPizzaDao {
 	private Pizza[] listepizza = new Pizza[100];
 
 	/**
-	 *  initialisation des pizzas avec le constructeur
+	 * initialisation des pizzas avec le constructeur
 	 */
 	public PizzaDao() {
 
@@ -24,10 +27,28 @@ public class PizzaDao implements IPizzaDao {
 	public Pizza[] findAllPizzas() {
 		return listepizza;
 	}
-
+	
+	/**
+	 *
+	 *regarde si la pizza existe déjà 
+	 * @param a
+	 * @return
+	 */
+	public boolean pizzaPresente(Pizza a){
+		for (Pizza s : findAllPizzas() ){
+			if(s.getCode().equals(a.getCode())){
+				return true;
+			}
+		}
+		return false;
+				
+	}
+	
+	
 	@Override
-	public boolean saveNewPizza(Pizza pizza) {
-
+	public boolean saveNewPizza(Pizza pizza) throws SavePizzaException {
+		
+		if(pizzaPresente(pizza)) throw new SavePizzaException("La pizza existe déjà");
 		int i = 0;
 		for (Pizza s : findAllPizzas()) {
 			if (s != null) {
@@ -36,16 +57,21 @@ public class PizzaDao implements IPizzaDao {
 		}
 		pizza.setId(i);
 		findAllPizzas()[i] = pizza;
+		
 		return false;
 	}
 
 	@Override
 	public boolean updatePizza(String codePizza, Pizza pizza) {
-		int i = 0;
-		while (!findAllPizzas()[i].getCode().equals(codePizza)) {
-			i++;
-		}
-		findAllPizzas()[i] = pizza;
+	
+		
+			int i = 0;
+			while (!findAllPizzas()[i].getCode().equals(codePizza)) {
+				i++;
+			}
+			findAllPizzas()[i] = pizza;
+
+		
 		return false;
 	}
 

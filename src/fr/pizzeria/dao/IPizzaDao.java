@@ -1,5 +1,8 @@
 package fr.pizzeria.dao;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -18,19 +21,28 @@ public interface IPizzaDao {
 	 * @param pizza
 	 * @return
 	 */
-	boolean saveNewPizza(Pizza pizza);
+	boolean saveNewPizza(Pizza pizza) throws SavePizzaException;
 
 	/**
 	 * @param codePizza
 	 * @param pizza
 	 * @return
 	 */
-	boolean updatePizza(String codePizza, Pizza pizza);
+	boolean updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
+
 
 	/**
 	 * @param codePizza
 	 * @return
 	 */
-	boolean deletePizza(String codePizza); 
-		
+	boolean deletePizza(String codePizza) throws DeletePizzaException; 
+	
+	
+	
+	
+	
+	
+	
+	
+
 }

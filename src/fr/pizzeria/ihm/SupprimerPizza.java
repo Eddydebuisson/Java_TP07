@@ -24,7 +24,10 @@ public class SupprimerPizza extends OptionMenu {
 		String pizza = Menu.sc.next();
 		
 		dao.deletePizza(pizza);
-
+		
+		
+		
+		
 		return true;
 	}
 
